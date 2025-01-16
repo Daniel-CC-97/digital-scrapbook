@@ -1,7 +1,9 @@
 export default function Home() {
   return (
-    <div>
-      <h1>Digital Scrapbook</h1>
+    <div className="w-screen h-screen">
+      <h1 className="text-pastelBlue-dark font-bold text-4xl">
+        Poppet and Boo
+      </h1>
     </div>
   );
 }

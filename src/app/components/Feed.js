@@ -20,11 +20,12 @@ const Feed = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Feed</h1>
-      {posts.map((post, index) => (
-        <Post post={post} key={index}></Post>
-      ))}
+    <div className="flex flex-col items-center mt-4">
+      <div className="w-1/2">
+        {posts.map((post, index) => (
+          <Post post={post} key={index}></Post>
+        ))}
+      </div>
     </div>
   );
 };

@@ -11,3 +11,16 @@
 body {
   @apply bg-pastelPink;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-pastelBlue-dark;
+}
+
+p {
+  @apply text-pastelBlue-dark;
+}

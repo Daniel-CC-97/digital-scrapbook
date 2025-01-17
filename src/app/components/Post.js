@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FormatText from "./FormatText";
 
 const Post = ({ post }) => {
   const imageUrl = post.fields.image
@@ -41,7 +42,7 @@ const Post = ({ post }) => {
       )}
       <div className={`p-1 ${textClass}`}>
         <h4 className={`font-bold text-lg ${titleClass}`}>{postTitle}</h4>
-        {postText && <p>{postText}</p>}
+        {postText && <FormatText text={postText} />}
       </div>
     </div>
   );

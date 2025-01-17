@@ -13,6 +13,14 @@ const Post = ({ post }) => {
   const postTitle = post.fields.title ? post.fields.title : null;
   const postText = post.fields.text ? post.fields.text : null;
 
+  const textClass = imageUrl
+    ? "rounded-b-lg bg-pastelPink-light text-pastelBlue-dark"
+    : "rounded-lg bg-pastelPink-darker text-pastelBlue-light";
+
+  const titleClass = imageUrl
+    ? "text-pastelBlue-dark"
+    : "text-pastelBlue-light";
+
   console.log("post: ", post);
   return (
     <div className="my-4">
@@ -31,8 +39,8 @@ const Post = ({ post }) => {
       ) : (
         <></>
       )}
-      <div className="bg-pastelPink-light rounded-b-lg p-1">
-        <h4 className="font-bold">{postTitle}</h4>
+      <div className={`p-1 ${textClass}`}>
+        <h4 className={`font-bold text-lg ${titleClass}`}>{postTitle}</h4>
         {postText && <p>{postText}</p>}
       </div>
     </div>

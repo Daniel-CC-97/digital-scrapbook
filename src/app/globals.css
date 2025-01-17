@@ -20,7 +20,3 @@ h5,
 h6 {
   @apply text-pastelBlue-dark;
 }
-
-p {
-  @apply text-pastelBlue-dark;
-}

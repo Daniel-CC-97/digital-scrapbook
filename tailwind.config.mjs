@@ -12,6 +12,7 @@ export default {
           light: "#ffe5ed", // lighter version
           DEFAULT: "#ffd1dc", // base pastelPink
           dark: "#ffadb8", // darker version
+          darker: "#e599a3",
         },
         pastelBlue: {
           light: "#d0f0f8", // lighter version

@@ -21,7 +21,7 @@ const Feed = () => {
 
   return (
     <div className="flex flex-col items-center mt-4">
-      <div className="w-1/2">
+      <div className="w-2/5">
         {posts.map((post, index) => (
           <Post post={post} key={index}></Post>
         ))}

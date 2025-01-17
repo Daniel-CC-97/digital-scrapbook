@@ -40,7 +40,7 @@ const Post = ({ post }) => {
       ) : (
         <></>
       )}
-      <div className={`p-1 ${textClass}`}>
+      <div className={`p-1 px-2 ${textClass}`}>
         <h4 className={`font-bold text-lg ${titleClass}`}>{postTitle}</h4>
         {postText && <FormatText text={postText} />}
       </div>

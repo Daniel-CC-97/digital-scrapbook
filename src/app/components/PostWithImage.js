@@ -52,7 +52,7 @@ const PostWithImage = ({ post }) => {
       <div className="relative">
         <img
           src={imageUrl}
-          alt="Hero Image"
+          alt="Post image"
           width={imageWidth}
           height={imageHeight}
           className="rounded-t-lg"

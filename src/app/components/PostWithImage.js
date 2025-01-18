@@ -15,7 +15,7 @@ const PostWithImage = ({ post }) => {
   const imageWidth = post.fields.image.fields.file.details.image.width;
   const imageHeight = post.fields.image.fields.file.details.image.height;
 
-  const commentAmount = comments ? comments.length : null;
+  const commentAmount = comments ? comments.length : 0;
 
   // Fetch comments again on component mount in case they are updated
   useEffect(() => {
@@ -57,19 +57,34 @@ const PostWithImage = ({ post }) => {
           height={imageHeight}
           className="rounded-t-lg"
         />
-        {comments && (
-          <div
-            className="absolute bottom-2 right-2 flex gap-2 items-center cursor-pointer"
-            onClick={() => setCommentsActive(!commentsActive)}
-          >
-            <span className="text-white font-bold">{commentAmount}</span>
-            <img
-              className="w-8 h-8"
-              src="/icons/comment-regular.svg"
-              alt="Comments Icon"
-            />
+        <div className="absolute bottom-2 right-2 flex gap-2">
+          {comments.length > 0 && (
+            <button
+              className="flex gap-2 items-center cursor-pointer"
+              onClick={() => setCommentsActive(!commentsActive)}
+            >
+              <span className="text-white font-bold">{commentAmount}</span>
+              <img
+                className="w-8 h-8"
+                src="/icons/comment-regular.svg"
+                alt="Comments Icon"
+              />
+            </button>
+          )}
+          {/* Button to open the Modal */}
+          <div>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="flex gap-2 items-center cursor-pointer"
+            >
+              <img
+                className="w-8 h-8"
+                src="/icons/add-comment.svg"
+                alt="Add Comments Icon"
+              />
+            </button>
           </div>
-        )}
+        </div>
       </div>
       <div className="p-1 px-2 rounded-b-lg bg-pastelPink-light text-pastelBlue-dark">
         <h4 className="font-bold text-lg text-pastelBlue-dark">
@@ -78,25 +93,15 @@ const PostWithImage = ({ post }) => {
         {post.fields.text && <FormatText text={post.fields.text} />}
       </div>
 
-      {commentsActive && comments && (
-        <div className="mt-2 bg-pastelBlue-light p-3 rounded-lg">
+      {commentsActive && comments.length > 0 && (
+        <div className="mt-2 bg-pastelBlue-light p-1 px-2 rounded-lg">
           {comments.map((comment, index) => (
-            <p key={index} className="mb-2 text-pastelPink-darker">
+            <p key={index} className="my-1 text-pastelPink-darker">
               <strong>{comment.fields.author}:</strong> {comment.fields.comment}
             </p>
           ))}
         </div>
       )}
-
-      {/* Button to open the Modal */}
-      <div className="mt-4">
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="p-2 bg-pastelPink-light text-white rounded-lg"
-        >
-          Add Comment
-        </button>
-      </div>
 
       {/* Modal for Adding Comment */}
       {isModalOpen && (

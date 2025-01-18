@@ -19,6 +19,8 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
+  console.log("posts: ", posts);
+
   return (
     <div className="flex flex-col items-center overflow-scroll h-screen">
       <Header />

@@ -22,23 +22,35 @@ const Post = ({ post }) => {
     ? "text-pastelBlue-dark"
     : "text-pastelBlue-light";
 
-  console.log("post: ", post);
+  const comments = post.fields.comments;
+  const commentAmount = comments ? comments.length : null;
+
   return (
     <div className="my-4">
-      {imageUrl ? (
-        <Image
-          src={imageUrl}
-          alt="Hero Image"
-          quality={100}
-          width={imageWidth}
-          height={imageHeight}
-          priority={true}
-          placeholder="empty"
-          layout="responsive"
-          className="rounded-t-lg"
-        />
-      ) : (
-        <></>
+      {imageUrl && (
+        <div className="relative">
+          <Image
+            src={imageUrl}
+            alt="Hero Image"
+            quality={100}
+            width={imageWidth}
+            height={imageHeight}
+            priority={true}
+            placeholder="empty"
+            layout="responsive"
+            className="rounded-t-lg"
+          />
+          {comments && (
+            <div className="absolute bottom-2 right-2 flex gap-2 items-center">
+              <span className="text-white font-bold">{commentAmount}</span>
+              <img
+                className="w-8 h-8"
+                src="/icons/comment-regular.svg"
+                alt="My Icon"
+              />
+            </div>
+          )}
+        </div>
       )}
       <div className={`p-1 px-2 ${textClass}`}>
         <h4 className={`font-bold text-lg ${titleClass}`}>{postTitle}</h4>

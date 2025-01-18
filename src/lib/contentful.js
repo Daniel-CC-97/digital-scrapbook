@@ -9,11 +9,22 @@ const client = createClient({
 export const getPosts = async () => {
   const response = await client.getEntries({
     content_type: "post",
+    include: 10, // Include one level of linked entries (e.g., comments)
   });
-
-  console.log("posts: ", response.items);
 
   return response.items;
 };
+
+export const getComments = async () => {
+  const response = await client.getEntries({
+    content_type: "comments",
+  });
+
+  console.log("comments: ", response.items);
+
+  return response.items;
+};
+
+getComments();
 
 export default client;

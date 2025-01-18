@@ -1,7 +1,7 @@
 "use client";
 import { getPosts } from "@/lib/contentful";
 import { useEffect, useState } from "react";
-import Post from "./Post";
+import Post from "./Post.js";
 import Header from "./Header";
 
 const Feed = () => {
@@ -23,7 +23,7 @@ const Feed = () => {
 
   return (
     <div className="flex flex-col items-center overflow-scroll h-screen">
-      <Header />
+      {/* <Header /> */}
       <div className="w-100% mx-4 md:w-2/5 md:mx-0">
         {posts.map((post, index) => (
           <Post post={post} key={index}></Post>

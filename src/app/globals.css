@@ -9,9 +9,34 @@
 }
 
 body {
-  @apply bg-pastelPink;
+  @apply bg-pastelPink; /* Tailwind pastel pink background */
+  position: relative; /* Make sure the body is positioned to place the overlay */
+  height: 100vh; /* Ensure it takes up the full viewport height */
+  margin: 0; /* Remove default margin to ensure full screen */
+}
+
+body::before {
+  content: ""; /* Empty content for the pseudo-element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-image: url("/images/background.jpg");
   background-position: center;
+  background-size: cover;
+  z-index: -1; /* Ensure the image is behind the content */
+}
+
+body::after {
+  content: ""; /* Empty content for the overlay */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2); /* Dark overlay */
+  z-index: -1; /* Ensure the overlay is behind the content but above the image */
 }
 
 h1,

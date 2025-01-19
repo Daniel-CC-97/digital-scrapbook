@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import FormatText from "./FormatText";
 import { addCommentToPost } from "@/lib/contentful"; // Import the function
+import PostHeader from "./PostHeader";
 
 const PostWithText = ({ post }) => {
   const [commentsActive, setCommentsActive] = useState(false);
@@ -45,12 +46,7 @@ const PostWithText = ({ post }) => {
 
   return (
     <div className="my-4">
-      <div className="p-1 px-2 rounded-t-lg bg-pastelPink-darker text-pastelBlue-light">
-        <h4 className="font-bold text-lg text-pastelBlue-light">
-          {post.fields.title}
-        </h4>
-        {post.fields.text && <FormatText text={post.fields.text} />}
-      </div>
+      <PostHeader post={post} image={false}></PostHeader>
 
       <div className="flex justify-end bg-pastelPink-darker rounded-b-lg">
         <div className="flex gap-2 bg-pastelPink-darker p-1 rounded-b-lg">

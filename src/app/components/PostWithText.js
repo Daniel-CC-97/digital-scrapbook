@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { addCommentToPost } from "@/lib/contentful"; // Import the function
 import PostHeader from "./PostHeader";
 import Comments from "./Comments";
+import AddingCommentModal from "./AddingCommentModal";
 import AddingComment from "./AddingComment";
 
 const PostWithText = ({ post }) => {
@@ -49,41 +50,18 @@ const PostWithText = ({ post }) => {
     <div className="my-4">
       <PostHeader post={post} image={false}></PostHeader>
 
-      <div className="flex justify-end bg-pastelPink-darker rounded-b-lg">
-        <div className="flex gap-2 bg-pastelPink-darker p-1 rounded-b-lg">
-          {comments.length > 0 && (
-            <button
-              className="flex gap-2 items-center cursor-pointer"
-              onClick={() => setCommentsActive(!commentsActive)}
-            >
-              <span className="text-white font-bold">{commentAmount}</span>
-              <img
-                className="w-8 h-8"
-                src="/icons/comment-regular.svg"
-                alt="Comments Icon"
-              />
-            </button>
-          )}
-          {/* Button to open the Modal */}
-          <div>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="flex gap-2 items-center cursor-pointer"
-            >
-              <img
-                className="w-8 h-8"
-                src="/icons/add-comment.svg"
-                alt="Add Comment Icon"
-              />
-            </button>
-          </div>
-        </div>
-      </div>
+      <AddingComment
+        comments={comments}
+        setCommentsActive={setCommentsActive}
+        commentsActive={commentsActive}
+        setIsModalOpen={setIsModalOpen}
+        commentAmount={commentAmount}
+      ></AddingComment>
 
       <Comments commentsActive={commentsActive} comments={comments}></Comments>
 
       {/* Modal for Adding Comment */}
-      <AddingComment
+      <AddingCommentModal
         isModalOpen={isModalOpen}
         newComment={newComment}
         setNewComment={setNewComment}
@@ -91,7 +69,7 @@ const PostWithText = ({ post }) => {
         setAuthor={setAuthor}
         handleSubmitComment={handleSubmitComment}
         setIsModalOpen={setIsModalOpen}
-      ></AddingComment>
+      ></AddingCommentModal>
     </div>
   );
 };

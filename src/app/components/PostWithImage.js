@@ -5,7 +5,7 @@ import { addCommentToPost } from "@/lib/contentful"; // Import the function
 import PostHeader from "./PostHeader";
 import Comments from "./Comments";
 import FullScreenModal from "./FullScreenModal";
-import AddingComment from "./AddingComment";
+import AddingCommentModal from "./AddingCommentModal";
 import Images from "./Images";
 
 const PostWithImage = ({ post }) => {
@@ -89,7 +89,7 @@ const PostWithImage = ({ post }) => {
       <Comments commentsActive={commentsActive} comments={comments}></Comments>
 
       {/* Modal for Adding Comment */}
-      <AddingComment
+      <AddingCommentModal
         isModalOpen={isModalOpen}
         newComment={newComment}
         setNewComment={setNewComment}
@@ -97,7 +97,7 @@ const PostWithImage = ({ post }) => {
         setAuthor={setAuthor}
         handleSubmitComment={handleSubmitComment}
         setIsModalOpen={setIsModalOpen}
-      ></AddingComment>
+      ></AddingCommentModal>
 
       {/* Full-Screen Modal for Viewing Image */}
       <FullScreenModal

@@ -38,6 +38,13 @@ body::after {
   z-index: -1; /* Ensure the overlay is behind the content but above the image */
 }
 
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 h1,
 h2,
 h3,

@@ -86,7 +86,7 @@ const PostWithText = ({ post }) => {
       {commentsActive && comments.length > 0 && (
         <div className="mt-2 bg-pastelBlue-light p-3 rounded-lg">
           {comments.map((comment, index) => (
-            <p key={index} className="mb-2 text-pastelPink-darker">
+            <p key={index} className="my-1 text-pastelPink-darker">
               <strong>{comment.fields.author}:</strong> {comment.fields.comment}
             </p>
           ))}

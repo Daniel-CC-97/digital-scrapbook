@@ -6,6 +6,7 @@ import AddPostButton from "./AddPostButton.js";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
+  const [reRender, setReRender] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -17,7 +18,7 @@ const Feed = () => {
       }
     };
     fetchPosts();
-  }, []);
+  }, [reRender]);
 
   return (
     <div className="flex relative flex-col items-center overflow-scroll h-screen">
@@ -27,7 +28,7 @@ const Feed = () => {
         ))}
       </div>
       {/* Pass addNewPost as a prop to AddPostButton */}
-      <AddPostButton />
+      <AddPostButton setReRender={setReRender} reRender={reRender} />
     </div>
   );
 };

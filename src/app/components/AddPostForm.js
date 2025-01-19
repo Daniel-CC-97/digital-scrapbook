@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { createPost } from "@/lib/contentful"; // Import the createPost logic
 
-const AddPostForm = ({ closeModal }) => {
+const AddPostForm = ({ closeModal, setReRender, reRender }) => {
   const [formData, setFormData] = useState({
     title: "",
     image: null,
@@ -44,6 +44,8 @@ const AddPostForm = ({ closeModal }) => {
         text: "",
         author: "Daniel",
       });
+
+      setReRender(!reRender);
 
       // Close the modal after successful submission
       closeModal();

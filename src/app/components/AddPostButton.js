@@ -2,7 +2,7 @@
 import { useState } from "react";
 import AddPostForm from "./AddPostForm"; // Ensure this imports the form
 
-const AddPostButton = () => {
+const AddPostButton = ({ setReRender, reRender }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -23,7 +23,11 @@ const AddPostButton = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg max-w-lg w-full relative">
             {/* Pass closeModal as a prop to AddPostForm */}
-            <AddPostForm closeModal={closeModal} />
+            <AddPostForm
+              closeModal={closeModal}
+              setReRender={setReRender}
+              reRender={reRender}
+            />
           </div>
         </div>
       )}

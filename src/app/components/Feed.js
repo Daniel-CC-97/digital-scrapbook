@@ -2,7 +2,7 @@
 import { getPosts } from "@/lib/contentful";
 import { useEffect, useState } from "react";
 import Post from "./Post.js";
-import Header from "./Header";
+import AddPostButton from "./AddPostButton.js";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
@@ -19,16 +19,15 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  console.log("posts: ", posts);
-
   return (
-    <div className="flex flex-col items-center overflow-scroll h-screen">
-      {/* <Header /> */}
+    <div className="flex relative flex-col items-center overflow-scroll h-screen">
       <div className="w-100% mx-4 md:w-2/5 md:mx-0">
         {posts.map((post, index) => (
           <Post post={post} key={index}></Post>
         ))}
       </div>
+      {/* Pass addNewPost as a prop to AddPostButton */}
+      <AddPostButton />
     </div>
   );
 };

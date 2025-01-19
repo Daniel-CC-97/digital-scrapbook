@@ -59,7 +59,7 @@ export const addCommentToPost = async (postId, commentText, author) => {
   }
 };
 
-export const createPost = async ({ title, image, text, author }) => {
+export const createPost = async ({ title, images, text, author }) => {
   try {
     const space = await managementClient.getSpace(
       process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
@@ -68,38 +68,41 @@ export const createPost = async ({ title, image, text, author }) => {
       process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT_ID
     );
 
-    // Upload the image if provided
-    let imageLink = null;
-    if (image) {
-      const asset = await environment.createAssetFromFiles({
-        fields: {
-          title: { "en-US": title },
-          file: {
-            "en-US": {
-              contentType: image.type,
-              fileName: image.name,
-              file: image,
+    // Upload the images if provided
+    let imageLinks = [];
+    if (images && images.length > 0) {
+      for (const image of images) {
+        const asset = await environment.createAssetFromFiles({
+          fields: {
+            title: { "en-US": title },
+            file: {
+              "en-US": {
+                contentType: image.type,
+                fileName: image.name,
+                file: image,
+              },
             },
           },
-        },
-      });
+        });
 
-      const processedAsset = await asset.processForAllLocales();
-      const publishedAsset = await processedAsset.publish();
-      imageLink = {
-        sys: {
-          type: "Link",
-          linkType: "Asset",
-          id: publishedAsset.sys.id,
-        },
-      };
+        const processedAsset = await asset.processForAllLocales();
+        const publishedAsset = await processedAsset.publish();
+
+        imageLinks.push({
+          sys: {
+            type: "Link",
+            linkType: "Asset",
+            id: publishedAsset.sys.id,
+          },
+        });
+      }
     }
 
     // Create the post
     const post = await environment.createEntry("post", {
       fields: {
         title: { "en-US": title },
-        image: { "en-US": imageLink },
+        images: { "en-US": imageLinks },
         text: { "en-US": text },
         author: { "en-US": author },
       },

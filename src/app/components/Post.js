@@ -4,9 +4,11 @@ import PostWithImage from "./PostWithImage";
 import PostWithText from "./PostWithText";
 
 const Post = ({ post }) => {
-  const hasImage = !!post.fields.image;
+  console.log("post: ", post);
 
-  return hasImage ? (
+  const hasImages = !!post.fields.images;
+
+  return hasImages ? (
     <PostWithImage post={post} />
   ) : (
     <PostWithText post={post} />

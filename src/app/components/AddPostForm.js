@@ -5,7 +5,7 @@ import { createPost } from "@/lib/contentful"; // Import the createPost logic
 const AddPostForm = ({ closeModal, setReRender, reRender }) => {
   const [formData, setFormData] = useState({
     title: "",
-    image: null,
+    images: [], // Updated to support multiple images
     text: "",
     author: "Daniel", // Default value
   });
@@ -16,7 +16,7 @@ const AddPostForm = ({ closeModal, setReRender, reRender }) => {
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === "file") {
-      setFormData({ ...formData, [name]: files[0] });
+      setFormData({ ...formData, [name]: [...files] }); // Store all selected files
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -32,7 +32,7 @@ const AddPostForm = ({ closeModal, setReRender, reRender }) => {
       // Call the createPost logic
       await createPost({
         title: formData.title,
-        image: formData.image,
+        images: formData.images, // Pass all selected images
         text: formData.text,
         author: formData.author,
       });
@@ -40,7 +40,7 @@ const AddPostForm = ({ closeModal, setReRender, reRender }) => {
       setSuccessMessage("Post created successfully!");
       setFormData({
         title: "",
-        image: null,
+        images: [],
         text: "",
         author: "Daniel",
       });
@@ -79,11 +79,12 @@ const AddPostForm = ({ closeModal, setReRender, reRender }) => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium">Image</label>
+        <label className="block text-sm font-medium">Images</label>
         <input
           type="file"
-          name="image"
+          name="images"
           onChange={handleChange}
+          multiple // Allow multiple files to be selected
           className="mt-1 block w-full"
         />
       </div>

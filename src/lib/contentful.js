@@ -9,22 +9,22 @@ const client = createDeliveryClient({
 
 // Initialize the Contentful Management API client (for writing data)
 const managementClient = createManagementClient({
-  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_MANAGEMENT_API_TOKEN, // Add this token in your environment variables
+  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_MANAGEMENT_API_TOKEN,
 });
 
-// Retrieve the list of small articles from Contentful
+// Retrieve the list of posts from Contentful
 export const getPosts = async () => {
   const response = await client.getEntries({
     content_type: "post",
-    include: 10, // Include one level of linked entries (e.g., comments)
+    include: 10, // Include linked entries (e.g., comments)
   });
 
   return response.items;
 };
 
+// Add a comment to a post
 export const addCommentToPost = async (postId, commentText, author) => {
   try {
-    // Get the content space and environment from the management client
     const space = await managementClient.getSpace(
       process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
     );
@@ -32,44 +32,85 @@ export const addCommentToPost = async (postId, commentText, author) => {
       process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT_ID
     );
 
-    // Step 1: Create the new comment entry
     const comment = await environment.createEntry("comments", {
       fields: {
-        comment: {
-          "en-US": commentText, // The text of the comment
-        },
-        author: {
-          "en-US": author, // The author of the comment
-        },
+        comment: { "en-US": commentText },
+        author: { "en-US": author },
       },
     });
 
-    // Step 2: Publish the comment
-    await comment.publish(); // Publish the new comment
+    await comment.publish();
 
-    // Step 3: Get the latest version of the post
     const post = await environment.getEntry(postId);
 
-    // Ensure the comments field exists before pushing the comment
     if (!post.fields.comments) {
-      post.fields.comments = { "en-US": [] }; // Initialize comments array if not present
+      post.fields.comments = { "en-US": [] };
     }
 
-    // Link the comment to the post
     post.fields.comments["en-US"].push({
-      sys: {
-        type: "Link",
-        linkType: "Entry",
-        id: comment.sys.id,
-      },
+      sys: { type: "Link", linkType: "Entry", id: comment.sys.id },
     });
 
-    // Step 4: Update the post with the correct version
     (await post.update()).publish();
 
     console.log("Comment added, published, and linked to post!");
   } catch (error) {
     console.error("Error adding comment to post:", error);
+  }
+};
+
+export const createPost = async ({ title, image, text, author }) => {
+  try {
+    const space = await managementClient.getSpace(
+      process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+    );
+    const environment = await space.getEnvironment(
+      process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT_ID
+    );
+
+    // Upload the image if provided
+    let imageLink = null;
+    if (image) {
+      const asset = await environment.createAssetFromFiles({
+        fields: {
+          title: { "en-US": title },
+          file: {
+            "en-US": {
+              contentType: image.type,
+              fileName: image.name,
+              file: image,
+            },
+          },
+        },
+      });
+
+      const processedAsset = await asset.processForAllLocales();
+      const publishedAsset = await processedAsset.publish();
+      imageLink = {
+        sys: {
+          type: "Link",
+          linkType: "Asset",
+          id: publishedAsset.sys.id,
+        },
+      };
+    }
+
+    // Create the post
+    const post = await environment.createEntry("post", {
+      fields: {
+        title: { "en-US": title },
+        image: { "en-US": imageLink },
+        text: { "en-US": text },
+        author: { "en-US": author },
+      },
+    });
+
+    // Publish the post
+    await post.publish();
+    console.log("Post created successfully!");
+  } catch (error) {
+    console.error("Error creating post:", error);
+    throw new Error("Failed to create post");
   }
 };
 

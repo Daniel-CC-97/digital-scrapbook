@@ -125,13 +125,13 @@ const PostWithText = ({ post }) => {
             <div className="mt-4 flex gap-2">
               <button
                 onClick={handleSubmitComment}
-                className="p-2 bg-pastelPink-light text-white rounded-lg"
+                className="p-2 bg-pastelPink-dark text-white rounded-lg hover:bg-pastelPink"
               >
                 Submit Comment
               </button>
               <button
                 onClick={() => setIsModalOpen(false)} // Close the modal
-                className="p-2 bg-gray-500 text-white rounded-lg"
+                className="bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-md hover:bg-gray-400"
               >
                 Cancel
               </button>

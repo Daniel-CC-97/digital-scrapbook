@@ -11,6 +11,7 @@ const PostWithImage = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false); // To control the modal visibility
   const [comments, setComments] = useState(post.fields.comments || []); // Store comments in state
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // Track the current image index
+  const [clickedImageIndex, setClickedImageIndex] = useState(null); // Track the clicked image index for modal
 
   const images = post.fields.images || []; // Get all images
   const commentAmount = comments ? comments.length : 0;
@@ -32,6 +33,12 @@ const PostWithImage = ({ post }) => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
+  };
+
+  // Handle click on the image to open the modal
+  const handleImageClick = (index) => {
+    setClickedImageIndex(index); // Set clicked image index for modal
+    setIsModalOpen(true); // Open the modal
   };
 
   const handleSubmitComment = () => {
@@ -68,24 +75,24 @@ const PostWithImage = ({ post }) => {
               height={
                 images[currentImageIndex].fields.file.details.image.height
               }
-              className="rounded-t-lg"
+              className="rounded-t-lg cursor-pointer" // Add cursor pointer for interactivity
+              onClick={() => handleImageClick(currentImageIndex)} // Click to open the modal
             />
             {images.length > 1 && (
               <>
-                <div className="absolute inset-0 flex justify-between items-center">
-                  <button
-                    className="bg-black bg-opacity-50 text-white p-2 rounded-full"
-                    onClick={handlePrevImage}
-                  >
-                    &#8249; {/* Left arrow */}
-                  </button>
-                  <button
-                    className="bg-black bg-opacity-50 text-white p-2 rounded-full"
-                    onClick={handleNextImage}
-                  >
-                    &#8250; {/* Right arrow */}
-                  </button>
-                </div>
+                <button
+                  className="bg-black w-8 h-8 my-auto absolute top-0 left-2 bottom-0 bg-opacity-50 text-white rounded-full"
+                  onClick={handlePrevImage}
+                >
+                  &#8249; {/* Left arrow */}
+                </button>
+                <button
+                  className="bg-black w-8 h-8 my-auto absolute top-0 right-2 bottom-0 bg-opacity-50 text-white rounded-full"
+                  onClick={handleNextImage}
+                >
+                  &#8250; {/* Right arrow */}
+                </button>
+
                 <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
                   {images.map((_, index) => (
                     <span
@@ -194,6 +201,21 @@ const PostWithImage = ({ post }) => {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Full-Screen Modal for Viewing Image */}
+      {isModalOpen && clickedImageIndex !== null && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
+          onClick={() => setIsModalOpen(false)} // Close modal when clicking outside
+        >
+          <img
+            src={`http:${images[clickedImageIndex].fields.file.url}`}
+            alt="Full-screen image"
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking the image
+          />
         </div>
       )}
     </div>

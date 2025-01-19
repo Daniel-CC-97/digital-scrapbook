@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import FormatText from "./FormatText";
 import { addCommentToPost } from "@/lib/contentful"; // Import the function
 import PostHeader from "./PostHeader";
+import Comments from "./Comments";
 
 const PostWithText = ({ post }) => {
   const [commentsActive, setCommentsActive] = useState(false);
@@ -79,15 +79,7 @@ const PostWithText = ({ post }) => {
         </div>
       </div>
 
-      {commentsActive && comments.length > 0 && (
-        <div className="mt-2 bg-pastelBlue-light p-3 rounded-lg">
-          {comments.map((comment, index) => (
-            <p key={index} className="my-1 text-pastelPink-darker">
-              <strong>{comment.fields.author}:</strong> {comment.fields.comment}
-            </p>
-          ))}
-        </div>
-      )}
+      <Comments commentsActive={commentsActive} comments={comments}></Comments>
 
       {/* Modal for Adding Comment */}
       {isModalOpen && (

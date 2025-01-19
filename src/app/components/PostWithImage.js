@@ -109,7 +109,7 @@ const PostWithImage = ({ post }) => {
             )}
           </div>
         )}
-        <div className="absolute bottom-2 right-2 flex gap-2">
+        <div className="absolute z-10 bottom-2 right-2 flex gap-2">
           {comments.length > 0 && (
             <button
               className="flex gap-2 items-center cursor-pointer"

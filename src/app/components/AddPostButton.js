@@ -13,7 +13,7 @@ const AddPostButton = ({ setReRender, reRender }) => {
       {/* Button to open the modal */}
       <button
         onClick={openModal}
-        className="bg-pastelPink-dark fixed bottom-2 right-2 text-white font-medium py-2 px-4 rounded-md hover:bg-pastelPink-light"
+        className="bg-pastelPink-dark z-20 fixed bottom-2 right-2 text-white font-medium py-2 px-4 rounded-md hover:bg-pastelPink-light"
       >
         Add Post
       </button>

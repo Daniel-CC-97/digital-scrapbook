@@ -25,13 +25,13 @@ const Images = ({
           {images.length > 1 && (
             <>
               <button
-                className="bg-black w-8 h-8 my-auto absolute top-0 left-2 bottom-0 bg-opacity-50 text-white rounded-full"
+                className="bg-pastelPink-light/50 backdrop-blur-sm w-8 h-8 my-auto absolute top-0 left-2 bottom-0 bg-opacity-50 text-white rounded-full"
                 onClick={handlePrevImage}
               >
                 &#8249; {/* Left arrow */}
               </button>
               <button
-                className="bg-black w-8 h-8 my-auto absolute top-0 right-2 bottom-0 bg-opacity-50 text-white rounded-full"
+                className="bg-pastelPink-light/50 backdrop-blur-sm w-8 h-8 my-auto absolute top-0 right-2 bottom-0 bg-opacity-50 text-white rounded-full"
                 onClick={handleNextImage}
               >
                 &#8250; {/* Right arrow */}
@@ -53,7 +53,7 @@ const Images = ({
           )}
         </div>
       )}
-      <div className="absolute z-10 bottom-2 right-2 flex gap-2">
+      <div className="absolute z-10 bg-pastelPink-light/50 backdrop-blur-sm p-2 rounded-tl-lg bottom-0 right-0 flex gap-2">
         {comments.length > 0 && (
           <button
             className="flex gap-2 items-center cursor-pointer"

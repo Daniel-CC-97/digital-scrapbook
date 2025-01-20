@@ -67,7 +67,7 @@ const PostWithImage = ({ post }) => {
   };
 
   return (
-    <div className="my-4">
+    <div className="my-4 shadow-md">
       {/* Image Carousel */}
       <Images
         images={images}

@@ -47,7 +47,7 @@ const PostWithText = ({ post }) => {
   };
 
   return (
-    <div className="my-4">
+    <div className="my-4 shadow-md">
       <PostHeader post={post} image={false}></PostHeader>
 
       <AddingComment

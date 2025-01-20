@@ -19,7 +19,7 @@ const Images = ({
             alt="Post image"
             width={images[currentImageIndex].fields.file.details.image.width}
             height={images[currentImageIndex].fields.file.details.image.height}
-            className="rounded-t-lg w-full cursor-pointer" // Add cursor pointer for interactivity
+            className=" w-full cursor-pointer" // Add cursor pointer for interactivity
             onClick={() => handleImageClick(currentImageIndex)} // Click to open the modal
           />
           {images.length > 1 && (

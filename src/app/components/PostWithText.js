@@ -53,7 +53,7 @@ const PostWithText = ({ post, setPosts }) => {
   };
 
   return (
-    <div className="my-4 shadow-md">
+    <div className="my-4 shadow-md border-solid border-2 rounded-lg overflow-hidden border-pastelPink-light">
       <PostHeader post={post} image={false}></PostHeader>
 
       <AddingComment

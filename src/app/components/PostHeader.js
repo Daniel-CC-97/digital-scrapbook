@@ -5,8 +5,8 @@ const PostHeader = ({ post, image }) => {
     <div
       className={`p-1 px-2 ${
         image
-          ? "rounded-b-lg bg-pastelPink-light text-pastelBlue-dark"
-          : "rounded-t-lg bg-pastelPink-darker text-pastelBlue-light"
+          ? " bg-pastelPink-light text-pastelBlue-dark"
+          : " bg-pastelPink-darker text-pastelBlue-light"
       }`}
     >
       <h4

@@ -13,13 +13,15 @@ const Images = ({
   return (
     <div className="relative">
       {images.length > 0 && (
-        <div>
+        <div className={images.length > 1 ? "w-96 h-96" : ""}>
           <img
             src={`http:${images[currentImageIndex].fields.file.url}`}
             alt="Post image"
             width={images[currentImageIndex].fields.file.details.image.width}
             height={images[currentImageIndex].fields.file.details.image.height}
-            className=" w-full cursor-pointer" // Add cursor pointer for interactivity
+            className={`w-full cursor-pointer object-cover ${
+              images.length > 1 ? "absolute h-full" : ""
+            }`} // Add cursor pointer for interactivity
             onClick={() => handleImageClick(currentImageIndex)} // Click to open the modal
           />
           {images.length > 1 && (

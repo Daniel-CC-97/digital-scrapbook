@@ -5,13 +5,13 @@ const PostHeader = ({ post, image }) => {
     <div
       className={`p-1 px-2 ${
         image
-          ? " bg-pastelPink-light text-pastelBlue-dark"
+          ? " bg-pastelPink-light text-pastelPink-darker"
           : " bg-pastelPink-darker text-pastelBlue-light"
       }`}
     >
       <h4
         className={`font-bold text-lg ${
-          image ? "text-pastelBlue-dark" : "text-pastelBlue-light"
+          image ? "text-pastelPink-darker" : "text-pastelBlue-light"
         }`}
       >
         {post.fields.title}

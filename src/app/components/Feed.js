@@ -108,7 +108,7 @@ const Feed = () => {
       >
         {filteredPosts.map((post, index) => (
           <div key={index} className="mb-4">
-            <Post post={post} />
+            <Post post={post} setPosts={setPosts} />
           </div>
         ))}
       </Masonry>

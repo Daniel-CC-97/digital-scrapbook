@@ -3,13 +3,13 @@
 import PostWithImage from "./PostWithImage";
 import PostWithText from "./PostWithText";
 
-const Post = ({ post }) => {
+const Post = ({ post, setPosts }) => {
   const hasImages = !!post.fields.images;
 
   return hasImages ? (
-    <PostWithImage post={post} />
+    <PostWithImage post={post} setPosts={setPosts} />
   ) : (
-    <PostWithText post={post} />
+    <PostWithText post={post} setPosts={setPosts} />
   );
 };
 

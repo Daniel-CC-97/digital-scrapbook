@@ -53,16 +53,18 @@ const PostWithText = ({ post, setPosts }) => {
   };
 
   return (
-    <div className="my-4 shadow-md border-solid border-2 rounded-lg overflow-hidden border-pastelPink-light">
-      <PostHeader post={post} image={false}></PostHeader>
+    <div className="my-4">
+      <div className="shadow-md border-solid border-2 rounded-lg overflow-hidden border-pastelPink-light">
+        <PostHeader post={post} image={false}></PostHeader>
 
-      <AddingComment
-        comments={post.fields.comments || []} // Pass comments directly
-        setCommentsActive={setCommentsActive}
-        commentsActive={commentsActive}
-        setIsModalOpen={setIsModalOpen}
-        commentAmount={commentAmount}
-      ></AddingComment>
+        <AddingComment
+          comments={post.fields.comments || []} // Pass comments directly
+          setCommentsActive={setCommentsActive}
+          commentsActive={commentsActive}
+          setIsModalOpen={setIsModalOpen}
+          commentAmount={commentAmount}
+        ></AddingComment>
+      </div>
 
       <Comments
         commentsActive={commentsActive}

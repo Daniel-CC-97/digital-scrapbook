@@ -75,23 +75,25 @@ const PostWithImage = ({ post, setPosts }) => {
   };
 
   return (
-    <div className="my-4 shadow-md border-solid border-2 rounded-lg overflow-hidden border-pastelPink-light">
-      {/* Image Carousel */}
-      <Images
-        images={images}
-        handleImageClick={handleImageClick}
-        currentImageIndex={currentImageIndex}
-        handlePrevImage={handlePrevImage}
-        handleNextImage={handleNextImage}
-        comments={post.fields.comments || []} // Pass comments directly
-        setCommentsActive={setCommentsActive}
-        commentsActive={commentsActive}
-        commentAmount={commentAmount}
-        setIsModalOpen={setIsModalOpen}
-      ></Images>
+    <div className="my-4">
+      <div className="shadow-md border-solid border-2 rounded-lg overflow-hidden border-pastelPink-light">
+        {/* Image Carousel */}
+        <Images
+          images={images}
+          handleImageClick={handleImageClick}
+          currentImageIndex={currentImageIndex}
+          handlePrevImage={handlePrevImage}
+          handleNextImage={handleNextImage}
+          comments={post.fields.comments || []} // Pass comments directly
+          setCommentsActive={setCommentsActive}
+          commentsActive={commentsActive}
+          commentAmount={commentAmount}
+          setIsModalOpen={setIsModalOpen}
+        ></Images>
 
-      {/* Post Content */}
-      <PostHeader post={post} image={true}></PostHeader>
+        {/* Post Content */}
+        <PostHeader post={post} image={true}></PostHeader>
+      </div>
 
       {/* Comments Section */}
       <Comments

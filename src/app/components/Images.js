@@ -27,16 +27,24 @@ const Images = ({
           {images.length > 1 && (
             <>
               <button
-                className="bg-pastelPink-light/50 backdrop-blur-sm w-8 h-8 my-auto absolute top-0 left-2 bottom-0 bg-opacity-50 text-white rounded-full"
+                className="bg-pastelPink-light/50 backdrop-blur-sm flex justify-center items-center w-10 h-10 my-auto absolute top-0 left-2 bottom-0 bg-opacity-50 rounded-full rotate-180"
                 onClick={handlePrevImage}
               >
-                &#8249;
+                <img
+                  className="w-8 h-8"
+                  src="/icons/chevron-right.svg"
+                  alt="Add Comments Icon"
+                />
               </button>
               <button
-                className="bg-pastelPink-light/50 backdrop-blur-sm w-8 h-8 my-auto absolute top-0 right-2 bottom-0 bg-opacity-50 text-white rounded-full"
+                className="bg-pastelPink-light/50 backdrop-blur-sm flex justify-center items-center w-10 h-10 my-auto absolute top-0 right-2 bottom-0 bg-opacity-50 rounded-full"
                 onClick={handleNextImage}
               >
-                &#8250;
+                <img
+                  className="w-8 h-8"
+                  src="/icons/chevron-right.svg"
+                  alt="Add Comments Icon"
+                />
               </button>
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
                 {images.map((_, index) => (

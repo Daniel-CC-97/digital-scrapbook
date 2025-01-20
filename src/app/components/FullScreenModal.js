@@ -28,10 +28,14 @@ const FullScreenModal = ({
         >
           {images.length > 1 && (
             <button
+              className="bg-pastelPink-light/50 backdrop-blur-sm flex justify-center items-center w-10 h-10 bg-opacity-50 rounded-full rotate-180"
               onClick={handlePrevImage}
-              className=" w-8 h-8 bg-pastelPink-light text-pastelPink-darker rounded-full shadow-lg left-4"
             >
-              &#8249; {/* Left arrow */}
+              <img
+                className="w-8 h-8"
+                src="/icons/chevron-right.svg"
+                alt="Add Comments Icon"
+              />
             </button>
           )}
           <img
@@ -44,18 +48,26 @@ const FullScreenModal = ({
           {/* Close Button */}
           <button
             onClick={() => setIsModalOpen(false)}
-            className="absolute w-8 h-8 top-4 right-4 bg-pastelPink-light text-pastelPink-darker rounded-full shadow-lg"
+            className="absolute w-10 h-10 top-4 right-4 bg-pastelPink-light/50 backdrop-blur-sm rounded-full shadow-lg flex justify-center items-center w-10 h-10 bg-opacity-50"
           >
-            &times; {/* Close icon */}
+            <img
+              className="w-8 h-8"
+              src="/icons/close.svg"
+              alt="Add Comments Icon"
+            />
           </button>
 
           {/* Navigation Buttons */}
           {images.length > 1 && (
             <button
+              className="bg-pastelPink-light/50 backdrop-blur-sm flex justify-center items-center w-10 h-10 bg-opacity-50 rounded-full"
               onClick={handleNextImage}
-              className=" w-8 h-8 bg-pastelPink-light text-pastelPink-darker rounded-full shadow-lg right-4"
             >
-              &#8250; {/* Right arrow */}
+              <img
+                className="w-8 h-8"
+                src="/icons/chevron-right.svg"
+                alt="Add Comments Icon"
+              />
             </button>
           )}
         </div>

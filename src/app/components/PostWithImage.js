@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { addCommentToPost } from "@/lib/contentful"; // Import the function
+import { addCommentToPost } from "@/lib/contentful";
 import PostHeader from "./PostHeader";
 import Comments from "./Comments";
 import FullScreenModal from "./FullScreenModal";
@@ -12,12 +12,13 @@ const PostWithImage = ({ post, setPosts }) => {
   const [commentsActive, setCommentsActive] = useState(false);
   const [newComment, setNewComment] = useState(""); // For the new comment text
   const [author, setAuthor] = useState(""); // For the comment author
-  const [isModalOpen, setIsModalOpen] = useState(false); // To control the modal visibility
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false); // Comment modal state
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false); // Image modal state
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // Track the current image index
   const [clickedImageIndex, setClickedImageIndex] = useState(null); // For modal image index
 
-  const images = post.fields.images || []; // Get all images
-  const commentAmount = post.fields.comments?.length || 0; // Use comments directly from parent state
+  const images = post.fields.images || [];
+  const commentAmount = post.fields.comments?.length || 0;
 
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -33,7 +34,7 @@ const PostWithImage = ({ post, setPosts }) => {
 
   const handleImageClick = (index) => {
     setClickedImageIndex(index);
-    setIsModalOpen(true);
+    setIsImageModalOpen(true);
   };
 
   const handleSubmitComment = () => {
@@ -45,7 +46,6 @@ const PostWithImage = ({ post, setPosts }) => {
         },
       };
 
-      // Update posts state in parent
       setPosts((prevPosts) =>
         prevPosts.map((p) =>
           p.sys.id === post.sys.id
@@ -60,16 +60,14 @@ const PostWithImage = ({ post, setPosts }) => {
         )
       );
 
-      // Send comment to Contentful
       addCommentToPost(post.sys.id, newComment, author)
         .then(() => {
           setNewComment("");
           setAuthor("");
-          setIsModalOpen(false);
+          setIsCommentModalOpen(false); // Close the comment modal
         })
         .catch((err) => {
           console.error("Error adding comment:", err);
-          // Optionally revert state changes on error
         });
     }
   };
@@ -84,11 +82,11 @@ const PostWithImage = ({ post, setPosts }) => {
           currentImageIndex={currentImageIndex}
           handlePrevImage={handlePrevImage}
           handleNextImage={handleNextImage}
-          comments={post.fields.comments || []} // Pass comments directly
+          comments={post.fields.comments || []}
           setCommentsActive={setCommentsActive}
           commentsActive={commentsActive}
           commentAmount={commentAmount}
-          setIsModalOpen={setIsModalOpen}
+          setIsCommentModalOpen={setIsCommentModalOpen}
         ></Images>
 
         {/* Post Content */}
@@ -98,26 +96,27 @@ const PostWithImage = ({ post, setPosts }) => {
       {/* Comments Section */}
       <Comments
         commentsActive={commentsActive}
-        comments={post.fields.comments} // Pass comments directly
+        comments={post.fields.comments}
       ></Comments>
 
       {/* Modal for Adding Comment */}
       <AddingCommentModal
-        isModalOpen={isModalOpen}
+        isModalOpen={isCommentModalOpen}
         newComment={newComment}
         setNewComment={setNewComment}
         author={author}
         setAuthor={setAuthor}
         handleSubmitComment={handleSubmitComment}
-        setIsModalOpen={setIsModalOpen}
+        setIsModalOpen={setIsCommentModalOpen}
       ></AddingCommentModal>
 
       {/* Full-Screen Modal for Viewing Image */}
       <FullScreenModal
-        isModalOpen={isModalOpen}
+        isModalOpen={isImageModalOpen}
         clickedImageIndex={clickedImageIndex}
-        setIsModalOpen={setIsModalOpen}
+        setIsModalOpen={setIsImageModalOpen}
         images={images}
+        setClickedImageIndex={setClickedImageIndex}
       ></FullScreenModal>
     </div>
   );

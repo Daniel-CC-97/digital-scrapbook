@@ -8,7 +8,7 @@ const Images = ({
   setCommentsActive,
   commentsActive,
   commentAmount,
-  setIsModalOpen,
+  setIsCommentModalOpen,
 }) => {
   return (
     <div className="relative">
@@ -21,8 +21,8 @@ const Images = ({
             height={images[currentImageIndex].fields.file.details.image.height}
             className={`w-full cursor-pointer object-cover ${
               images.length > 1 ? "absolute h-full" : ""
-            }`} // Add cursor pointer for interactivity
-            onClick={() => handleImageClick(currentImageIndex)} // Click to open the modal
+            }`}
+            onClick={() => handleImageClick(currentImageIndex)}
           />
           {images.length > 1 && (
             <>
@@ -30,15 +30,14 @@ const Images = ({
                 className="bg-pastelPink-light/50 backdrop-blur-sm w-8 h-8 my-auto absolute top-0 left-2 bottom-0 bg-opacity-50 text-white rounded-full"
                 onClick={handlePrevImage}
               >
-                &#8249; {/* Left arrow */}
+                &#8249;
               </button>
               <button
                 className="bg-pastelPink-light/50 backdrop-blur-sm w-8 h-8 my-auto absolute top-0 right-2 bottom-0 bg-opacity-50 text-white rounded-full"
                 onClick={handleNextImage}
               >
-                &#8250; {/* Right arrow */}
+                &#8250;
               </button>
-
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
                 {images.map((_, index) => (
                   <span
@@ -71,7 +70,7 @@ const Images = ({
         )}
         <div>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsCommentModalOpen(true)}
             className="flex gap-2 items-center cursor-pointer"
           >
             <img

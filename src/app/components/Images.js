@@ -17,6 +17,7 @@ const Images = ({
           <img
             src={`http:${images[currentImageIndex].fields.file.url}`}
             alt="Post image"
+            loading="lazy"
             width={images[currentImageIndex].fields.file.details.image.width}
             height={images[currentImageIndex].fields.file.details.image.height}
             className={`w-full cursor-pointer object-cover ${

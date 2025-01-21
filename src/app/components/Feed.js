@@ -54,7 +54,7 @@ const Feed = () => {
       // Filter by date range
       if (filters.dateRange.start || filters.dateRange.end) {
         filtered = filtered.filter((post) => {
-          const postDate = new Date(post.fields.date);
+          const postDate = new Date(post.sys.updatedAt);
           const startDate = filters.dateRange.start
             ? new Date(filters.dateRange.start)
             : null;

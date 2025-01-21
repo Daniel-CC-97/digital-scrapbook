@@ -3,6 +3,13 @@ import { useState } from "react";
 const FilterUI = ({ filters, setFilters }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const initialFilters = {
+    author: "",
+    type: "",
+    dateRange: { start: null, end: null },
+    keyword: "",
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
@@ -14,6 +21,10 @@ const FilterUI = ({ filters, setFilters }) => {
       ...prev,
       dateRange: { ...prev.dateRange, [name]: value },
     }));
+  };
+
+  const handleResetFilters = () => {
+    setFilters(initialFilters);
   };
 
   return (
@@ -106,6 +117,16 @@ const FilterUI = ({ filters, setFilters }) => {
                 className="w-full p-2 border border-pastelBlue rounded bg-white text-sm text-gray-800"
               />
             </div>
+          </div>
+
+          {/* Reset Filters Button */}
+          <div className="mt-4">
+            <button
+              onClick={handleResetFilters}
+              className="w-full bg-pastelBlue-dark text-white px-4 py-2 rounded shadow hover:bg-pastelBlue-light transition"
+            >
+              Reset Filters
+            </button>
           </div>
         </div>
       </div>

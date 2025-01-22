@@ -6,7 +6,7 @@ import AddPostButton from "./AddPostButton.js";
 import FilterUI from "./FilterUI.js";
 import Masonry from "react-masonry-css";
 
-const Feed = () => {
+const Feed = ({ onFeedLoaded }) => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [filters, setFilters] = useState({
@@ -87,6 +87,13 @@ const Feed = () => {
 
     applyFilters();
   }, [filters, posts]);
+
+  useEffect(() => {
+    if (posts.length > 0 && filteredPosts.length > 0) {
+      // Notify the parent that the feed has finished rendering
+      onFeedLoaded();
+    }
+  }, [filteredPosts, onFeedLoaded, posts.length]);
 
   const masonryBreakpoints = {
     default: 4,

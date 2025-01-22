@@ -24,12 +24,12 @@ const Images = ({
 
   return (
     <div className="relative">
-      <div className={images.length > 1 ? "w-96 h-96" : ""}>
+      <div className={images.length > 1 ? "h-96" : ""}>
         {/* Low-Quality Placeholder Image */}
         <img
           src={lowQualityUrl}
           alt="Low-quality placeholder"
-          className={`w-full object-cover ${
+          className={`w-full h-full object-cover ${
             !isLoaded ? "blur-sm scale-110" : "hidden"
           } transition-all duration-300`}
         />
@@ -41,9 +41,7 @@ const Images = ({
           loading="lazy"
           width={images[currentImageIndex].fields.file.details.image.width}
           height={images[currentImageIndex].fields.file.details.image.height}
-          className={`w-full cursor-pointer object-cover ${
-            images.length > 1 ? "absolute h-full" : ""
-          } ${
+          className={`w-full h-full object-cover cursor-pointer ${
             isLoaded ? "opacity-100" : "opacity-0"
           } transition-opacity duration-500`}
           onLoad={() => setIsLoaded(true)}
@@ -55,7 +53,7 @@ const Images = ({
       {images.length > 1 && (
         <>
           <button
-            className="bg-pastelPink-light/50 backdrop-blur-sm flex justify-center items-center w-10 h-10 my-auto absolute top-0 left-2 bottom-0 bg-opacity-50 rounded-full rotate-180"
+            className="bg-pastelPink-light/50 backdrop-blur-sm flex justify-center items-center w-10 h-10 my-auto absolute top-1/2 left-2 transform -translate-y-1/2 bg-opacity-50 rounded-full rotate-180"
             onClick={handlePrevImage}
           >
             <img
@@ -65,7 +63,7 @@ const Images = ({
             />
           </button>
           <button
-            className="bg-pastelPink-light/50 backdrop-blur-sm flex justify-center items-center w-10 h-10 my-auto absolute top-0 right-2 bottom-0 bg-opacity-50 rounded-full"
+            className="bg-pastelPink-light/50 backdrop-blur-sm flex justify-center items-center w-10 h-10 my-auto absolute top-1/2 right-2 transform -translate-y-1/2 bg-opacity-50 rounded-full"
             onClick={handleNextImage}
           >
             <img

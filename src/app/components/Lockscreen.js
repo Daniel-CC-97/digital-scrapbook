@@ -37,7 +37,7 @@ const Lockscreen = ({ onUnlock }) => {
           </p>
         </div>
         <div className="mb-4">
-          <div className="bg-gray-100 p-3 rounded-lg text-2xl tracking-widest text-center">
+          <div className="bg-gray-100 p-3 rounded-lg text-pastelPink-darker text-2xl tracking-widest text-center">
             {code.padEnd(6, "•")}
           </div>
         </div>

@@ -17,7 +17,7 @@ const Images = ({
   const imageUrl = images[currentImageIndex].fields.file.url;
 
   // Generate low-quality placeholder URL
-  const lowQualityUrl = `http:${imageUrl}?w=20&h=20&fm=jpg&q=10`;
+  const lowQualityUrl = `http:${imageUrl}?w=200&h=200&fm=jpg&q=10`;
 
   // Full-quality URL
   const fullQualityUrl = `http:${imageUrl}`;

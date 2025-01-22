@@ -29,9 +29,9 @@ const Images = ({
         <img
           src={lowQualityUrl}
           alt="Low-quality placeholder"
-          className={`w-full h-full object-cover ${
-            !isLoaded ? "blur-sm scale-110" : "hidden"
-          } transition-all duration-300`}
+          className={`w-full h-full absolute object-cover ${
+            isLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
+          } transition-opacity duration-500`}
         />
 
         {/* Full-Quality Image */}

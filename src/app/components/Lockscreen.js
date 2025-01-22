@@ -37,20 +37,30 @@ const Lockscreen = ({ onUnlock }) => {
           </p>
         </div>
         <div className="mb-4">
-          <div className="bg-gray-100 p-3 rounded-lg text-pastelPink-darker text-2xl tracking-widest text-center">
+          <div className="bg-pastelPink-light p-3 rounded-lg text-pastelPink-darker text-2xl tracking-widest text-center">
             {code.padEnd(6, "•")}
           </div>
         </div>
         <div className="grid grid-cols-3 gap-2 mb-4">
-          {["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].map((num) => (
+          {/* Keypad Buttons */}
+          {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((num, index) => (
             <button
-              key={num}
+              key={index}
               onClick={() => handleButtonClick(num)}
               className="border-pastelPink-light border text-pastelPink-light text-xl font-bold p-4 rounded-full shadow-md hover:bg-pastelPink-light hover:text-pastelPink-dark"
             >
               {num}
             </button>
           ))}
+          {/* Empty space for proper grid alignment */}
+          <div></div>
+          {/* The '0' button in the middle of the bottom row */}
+          <button
+            onClick={() => handleButtonClick("0")}
+            className="border-pastelPink-light border text-pastelPink-light text-xl font-bold p-4 rounded-full shadow-md hover:bg-pastelPink-light hover:text-pastelPink-dark"
+          >
+            0
+          </button>
         </div>
         <div className="flex justify-between gap-2">
           <button

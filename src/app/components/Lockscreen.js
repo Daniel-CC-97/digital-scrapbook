@@ -26,8 +26,8 @@ const Lockscreen = ({ onUnlock }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-pastelPink-light flex items-center justify-center z-50">
-      <div className="bg-pastelPink-dark p-6 rounded-lg shadow-lg w-80 text-center">
+    <div className="fixed inset-0 bg-pastelPink flex items-center justify-center z-50">
+      <div className="bg-pastelPink-dark border-2 border-pastelPink-light p-6 rounded-lg shadow-lg w-80 text-center">
         <div className="mb-4">
           <h2 className="text-2xl font-bold text-pastelPink-light">
             Enter Passcode
